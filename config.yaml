@@ -2,7 +2,8 @@ app:
   name: "web_app"
   mode: "dev"
   port: 8081
-
+  start_time: "2022-01-05"
+  machine_id: 1
 log:
   level: "debug"
   filename: "web_app.log"
@@ -14,7 +15,7 @@ mysql:
   port: 3306
   user: "root"
   password: "123456"
-  dbname: "test"
+  dbname: "goweb"
   max_open_conns: 200
   max_idle_conns: 50
 redis:
