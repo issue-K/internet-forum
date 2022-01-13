@@ -1,0 +1,52 @@
+basePath: 这里写base path
+definitions:
+  controller.ResponseData:
+    properties:
+      code:
+        type: integer
+      data: {}
+      msg: {}
+    type: object
+host: 这里写接口服务的localhost:8081
+info:
+  contact:
+    email: support@swagger.io
+    name: 这里写联系人信息
+    url: http://www.swagger.io/support
+  description: 一个简易的后端系统
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: cl title
+  version: "1.0"
+paths:
+  /api/v1/signup:
+    post:
+      consumes:
+      - application/json
+      description: 注册账号
+      parameters:
+      - in: query
+        name: password
+        required: true
+        type: string
+      - in: query
+        name: re_password
+        required: true
+        type: string
+      - in: query
+        name: username
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller.ResponseData'
+      summary: 注册账号接口
+      tags:
+      - 帖子相关接口
+swagger: "2.0"

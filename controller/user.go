@@ -7,7 +7,16 @@ import (
 	"web_app/logic"
 	"web_app/models"
 )
-// SignUpHandler  处理请求的函数
+
+// SignUpHandler
+// @Summary 注册账号接口
+// @Description 注册账号
+// @Tags 帖子相关接口
+// @Accept application/json
+// @Produce application/json
+// @Param object query models.ParamSignUp true "账号密码信息"
+// @Success 200 {object} ResponseData
+// @Router /api/v1/signup [post]
 func SignUpHandler(c *gin.Context){
 	//参数获取
 	p := new( models.ParamSignUp )
@@ -33,6 +42,7 @@ func SignUpHandler(c *gin.Context){
 
 func LoginHandler(c *gin.Context) {
 	//获取请求参数
+
 	p := new(models.ParamLogin)
 	if err := c.ShouldBindJSON(p); err != nil{
 		zap.L().Error("Login with invalid param",zap.Error(err) )
@@ -46,11 +56,15 @@ func LoginHandler(c *gin.Context) {
 		return
 	}
 
-	if err := logic.Login(p); err!=nil{
+	token, err := logic.Login(p)
+	if err!=nil {
 		zap.L().Error("Logic.Login failed",zap.Error(err))
 		ResponseErrorWithMsg(c,CodeInvalidPassword,"用户名或密码错误")
 		return
 	}
-	ResponseSuccess(c,nil)
+//	var temp map[string]interface{}
+//	temp["token"] = token
+
+	ResponseSuccess(c,gin.H{ "token":token } )
 	return
 }
